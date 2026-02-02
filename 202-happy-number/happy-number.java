@@ -1,12 +1,12 @@
 class Solution {
     public boolean isHappy(int n) {
-        Set<Integer> seen = new HashSet<>();
+        HashMap<Integer,Integer> seen = new HashMap<>();
 
         while (n != 1) {
-            if (seen.contains(n)) {
+            if (seen.containsKey(n)) {
                 return false;
             }
-            seen.add(n);
+            seen.put(n,1);
             n = sqr(n);
         }
         return true;
