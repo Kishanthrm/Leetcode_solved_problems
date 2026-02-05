@@ -8,7 +8,6 @@ class Solution {
             i++;
             j++;
             if(j < nums.length)sum = ((sum - nums[i-1])+nums[j]);
-            System.out.print(sum+" ");
             max = Math.max(sum/k,max);
         }
         return max;
