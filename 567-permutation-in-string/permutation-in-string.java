@@ -8,17 +8,15 @@ class Solution {
         int i = 0;
         for (int j = 0; j < s2.length(); j++) {
             s2map.put(s2.charAt(j), s2map.getOrDefault(s2.charAt(j), 0) + 1);
-            if (s1.length() < j-i+1) {
+            while (s1.length() <= j-i+1) {
+                if (s1map.equals(s2map)) {
+                    return true;
+                }
                 s2map.put(s2.charAt(i), s2map.get(s2.charAt(i)) - 1);
                 if (s2map.get(s2.charAt(i)) == 0) {
                     s2map.remove(s2.charAt(i));
                 }
                 i++;
-            }
-            if(s1.length() == j-i+1){
-                if (s1map.equals(s2map)) {
-                    return true;
-                }
             }
         }
         return false;
