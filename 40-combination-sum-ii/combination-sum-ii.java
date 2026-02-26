@@ -1,29 +1,32 @@
 class Solution {
-    List<List<Integer>> result = new ArrayList<>();
-    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
-        List<Integer> list = new ArrayList<>();
-        Arrays.sort(candidates);
-        int start = 0;
-        int sum =0;
-        backTracking(start, candidates, list, target,sum);
-        return result;
+    List<List<Integer>> list;
+    int n;
+    int[] arr;
+    public List<List<Integer>> combinationSum2(int[] arr, int target) {
+        this.arr = arr;
+        this.n = arr.length;
+        list = new ArrayList<>();
+        List<Integer> temp = new ArrayList<>();
+        Arrays.sort(arr);
+        backTracking(0,target,temp);
+        return list;
     }
 
-    public void backTracking(int start, int[] can, List<Integer> list,int tar,int sum){
-        if(sum == tar){
-            result.add(new ArrayList<>(list));
+    public void backTracking(int index, int target, List<Integer> temp){
+        if(target == 0){
+            list.add(new ArrayList<>(temp));
             return;
         }
-
-        if(sum > tar) return;
-
-        for(int i=start;i<can.length;i++){
-            if (i > start && can[i] == can[i - 1]) continue;
-            list.add(can[i]);
-            sum += can[i];
-            backTracking(i+1,can,list,tar,sum);
-            list.remove(list.size()-1);
-            sum -= can[i];
+        for(int i = index;i<n;i++){
+            if(i > index && arr[i] == arr[i-1]){
+                continue;
+            }
+            if(target < arr[i]){
+                break;
+            }
+            temp.add(arr[i]);
+            backTracking(i+1,target-arr[i],temp);
+            temp.remove(temp.size()-1);
         }
     }
 }
