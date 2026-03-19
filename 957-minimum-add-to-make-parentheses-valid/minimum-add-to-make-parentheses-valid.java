@@ -1,22 +1,21 @@
 class Solution {
     public int minAddToMakeValid(String s) {
-        Stack<Character> open = new Stack<>();
-        Stack<Character> close = new Stack<>();
-
-        for(int i = 0;i<s.length();i++){
+        Stack<Integer> open = new Stack<>();
+        Stack<Integer> close = new Stack<>();
+        for(int i=0;i<s.length();i++){
             char ch = s.charAt(i);
             if(ch == '('){
-                open.push(ch);
+                open.push(i);
             }
             else{
                 if(open.isEmpty()){
-                    close.push(ch);
+                    close.push(i);
                 }
                 else{
                     open.pop();
                 }
             }
         }
-        return (open.size() + close.size());
+        return Math.abs(open.size() + close.size());
     }
 }
